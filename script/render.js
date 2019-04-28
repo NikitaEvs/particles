@@ -132,8 +132,8 @@ function init() {
     let vel = new Vector(), vel2 = new Vector();
     vel.initWithAngle(0, 2);
     vel2.initWithAngle(14.3, 2);
-    spawners.push(new Spawner(new Vector(500, 500), vel, Math.PI/4, "#0ff"));
-    spawners.push(new Spawner(new Vector(700, 500), vel2, Math.PI/4, "#00f"));
+    spawners.push(new Spawner(new Vector(width/2, height/2), vel, Math.PI/4, "#0ff"));
+    //spawners.push(new Spawner(new Vector(700, 500), vel2, Math.PI/4, "#00f"));
 }
 
 function spawnNewParticles() {
