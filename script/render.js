@@ -42,7 +42,7 @@ function Vector(x, y) {
     };
 
     this.getAngle = function () {
-        return Math.atan(this.y/this.x);
+        return Math.atan(this.y / this.x);
     };
 
     this.init = function (x, y) {
@@ -51,12 +51,12 @@ function Vector(x, y) {
     };
 
     this.initWithAngle = function (angle, length) {
-        this.x = length*Math.cos(angle);
-        this.y = length*Math.sin(angle);
+        this.x = length * Math.cos(angle);
+        this.y = length * Math.sin(angle);
     };
 
     this.initNewWithAngle = function (angle, lenght) {
-        return new Vector(length*Math.cos(angle), length*Math.sin(angle));
+        return new Vector(length * Math.cos(angle), length * Math.sin(angle));
     }
 }
 
@@ -116,7 +116,7 @@ function Field(pos, mass) {
     this.pos = pos || new Vector();
 
     this.setMass = function (mass) {
-        if(mass < 0) {
+        if (mass < 0) {
             this.color = "#f00";
         } else {
             this.color = "#0f0";
@@ -132,7 +132,7 @@ function init() {
     let vel = new Vector(), vel2 = new Vector();
     vel.initWithAngle(0, 2);
     vel2.initWithAngle(14.3, 2);
-    spawners.push(new Spawner(new Vector(width/2, height/2), vel, Math.PI/4, "#0ff"));
+    spawners.push(new Spawner(new Vector(width / 2, height / 2), vel, Math.PI / 4, "#0ff"));
     //spawners.push(new Spawner(new Vector(700, 500), vel2, Math.PI/4, "#00f"));
 }
 
@@ -161,7 +161,7 @@ function moveParticles(maxX, maxY) {
 function drawParticles() {
     let particleSize = 1;
 
-    for(let i = 0; i < particles.length; i++) {
+    for (let i = 0; i < particles.length; i++) {
         ctx.fillStyle = particles[i].color;
         ctx.fillRect(particles[i].pos.x, particles[i].pos.y, particleSize, particleSize);
     }
@@ -177,7 +177,7 @@ function render() {
 
 /* Clear canvas */
 function clear() {
-    ctx.clearRect(0,0, width, height);
+    ctx.clearRect(0, 0, width, height);
 }
 
 /* Update canvas */
@@ -206,9 +206,7 @@ function queue() {
 }
 
 function handler(e) {
-    console.log(e.screenX);
-    console.log(e.screenY);
-    let field = new Field(new Vector(e.screenX - 69, e.screenY - 99), -5);
+    let field = new Field(new Vector(e.pageX, e.pageY), -5);
     fields = [field];
 }
 
