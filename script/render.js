@@ -132,7 +132,7 @@ function init() {
     let vel = new Vector(), vel2 = new Vector();
     vel.initWithAngle(0, 2);
     vel2.initWithAngle(14.3, 2);
-    spawners.push(new Spawner(new Vector(width / 2, height / 2), vel, Math.PI / 4, "#0ff"));
+    spawners.push(new Spawner(new Vector(width / 2, height / 2), vel, 0, "#0ff"));
     //spawners.push(new Spawner(new Vector(700, 500), vel2, Math.PI/4, "#00f"));
 }
 
@@ -205,12 +205,35 @@ function queue() {
     window.requestAnimationFrame(render);
 }
 
-function handler(e) {
+function handlerMouseMove(e) {
     let field = new Field(new Vector(e.pageX, e.pageY), -5);
-    fields = [field];
+    fields.shift();
+    fields.unshift(field);
 }
 
-canvas.addEventListener("mousemove", handler);
+function handlerMouseClick(e) {
+    console.log(e);
+    let mass;
+    if(!e.shiftKey) {
+        mass = 5;
+    } else {
+        mass = -5;
+    }
+    if(e.ctrlKey) {
+        mass *= 3;
+    }
+    if(e.altKey) {
+        let field = new Field(new Vector(e.pageX, e.pageY), -5);
+        fields = [];
+        fields.push(field);
+    } else {
+        let field = new Field(new Vector(e.pageX, e.pageY), mass);
+        fields.push(field);
+    }
+}
+
+canvas.addEventListener("mousemove", handlerMouseMove);
+canvas.addEventListener("click", handlerMouseClick);
 
 init();
 render();
